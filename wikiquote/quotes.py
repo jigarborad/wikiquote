@@ -38,6 +38,30 @@ def random_titles(
 def quotes(
     page_title: Text, max_quotes: int = DEFAULT_MAX_QUOTES, lang: Text = DEFAULT_LANG
 ) -> List[Text]:
+    # Improvement 2: Provide functionality for retrieving a random quote
+
+    # The current functionality retrieves all quotes from a given page.
+
+    # Here's how we can improve:
+
+    # 1. Add a new optional parameter `random` (defaulting to False).
+    #    - If `random` is True, the function should return a single random quote
+    #      from the extracted quotes.
+    #    - If `random` is False (default), the function continues to return
+    #      all extracted quotes.
+
+    # 2. Extract all quotes using the existing logic.
+
+    # 3. If `random` is True:
+    #    - Use built-in Python functionalities to select a random quote from the extracted list.
+    #      - We can use techniques like `choice` from the `random` module (imported internally)
+    #        or list indexing with a random number within the list range.
+    #    - Return the single random quote.
+
+    # This improvement offers users the flexibility to retrieve either all quotes
+    # or a single random quote from the specified page, without requiring them
+    # to import the `random` library themselves.
+
     local_page_url = PAGE_URL.format(lang=lang)
     data = utils.json_from_url(local_page_url, page_title)
     if "error" in data:
