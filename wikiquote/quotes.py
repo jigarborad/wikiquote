@@ -72,4 +72,26 @@ def quotes(
 
     html_content = data["parse"]["text"]["*"]
     html_tree = lxml.html.fromstring(html_content)
+
+    
+    # Improvement 3: Provide functionality for filtering quotes by length
+
+    # The current functionality retrieves all quotes or a single random quote.
+
+    # Here's how we can improve:
+
+    # 1. Add a new optional parameter `length` (with a default value of None).
+    #    - This parameter can take values like "long" or "short" to specify the desired quote length.
+
+    # 2. If `length` is provided:
+    #    - Extract all quotes using the existing logic.
+    #    - Define thresholds (e.g., word count or character count) to categorize quotes as "long" or "short".
+    #    - Filter the extracted quotes based on the provided `length` parameter.
+    #    - If `random` is True, select a random quote from the filtered list.
+
+    # 3. Return the filtered quotes (all or a single random one based on `random`).
+
+    # This improvement allows users to retrieve quotes based on their desired length,
+    # providing more control over the quote selection process.
+
     return langs.extract_quotes_lang(lang, html_tree, max_quotes)
