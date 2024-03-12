@@ -68,6 +68,23 @@ def quotes(
         raise utils.NoSuchPageException("No pages matched the title: " + page_title)
 
     if _is_disambiguation(data["parse"]["categories"]):
+        # Improvement 4: User-friendly handling of disambiguation
+
+        # The current functionality raises an exception when encountering a disambiguation page.
+
+        # Here's how we can improve:
+
+        # 1. If `_is_disambiguation(data["parse"]["categories"])` returns True:
+        #    - Inform the user that the search term has multiple meanings
+
+        # 2. Use the `search` function within _is_disambiguation() function to retrieve a number of relevant titles
+
+        # 3. Present the user with these limited options as numbered choices.
+
+        # 4. Request user to use one of these titles with quotes function again to get relevant quotes
+
+        # This improvement provides a more user-friendly experience by guiding the user
+
         raise utils.DisambiguationPageException("Title returned a disambiguation page.")
 
     html_content = data["parse"]["text"]["*"]
