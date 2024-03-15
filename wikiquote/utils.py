@@ -129,6 +129,90 @@ def extract_quotes_li(
 
 # TODO: Add features to extract author pages, disambiguation pages, and other pages
 
+# Improvement: Extracting Author Pages
+
+# We've identified a potential optimization in the `quotes()` function within `quotes.py`.
+# The current approach to extracting quotes might be adaptable to retrieve author pages.
+
+# Here's the reasoning:
+
+# 1. Similarities to Quote Extraction:
+#    - The logic behind finding the `page_title` variable in `quotes()` might be applicable
+#      to locating a specific `page_title` that signifies author pages.
+
+# 2. Identifying Author Page Pattern:
+#    - Author pages on Wikiquote often follow a consistent URL structure.
+#      - The English version uses `https://en.wikiquote.org/wiki/Category:Authors`.
+#      - Other languages may have similar patterns but in their respective languages
+#        (e.g., German: `https://de.wikiquote.org/wiki/Kategorie:Person`).
+
+# 3. Leveraging Existing Functionality:
+#    - Instead of implementing a completely new mechanism, we can potentially
+#      reuse the existing structure of the `quotes()` function.
+
+# Proposed Approach:
+
+# A. Define Specific Page Title:
+#    - We'll need to determine the precise `page_title` that indicates author pages
+#      (e.g., "Category:Authors" or its equivalent in different languages).
+
+# B. Modify `quotes()` Function:
+#    - Within `quotes()` (or a related function if more suitable), we can check if
+#      the extracted `page_title` matches the defined author page title.
+#    - If it does, we can perform the necessary actions to extract author information
+#      instead of quote data.
+
+# C. Flexibility for Different Languages:
+#    - The code should be adaptable to handle variations in the author page title
+#      across different languages. This might involve using a mapping or dictionary
+#      to associate language codes with their corresponding author page title patterns.
+
+# D. Potential Challenges:
+#    - The HTML structure of Wikiquote pages might change, potentially affecting
+#      the reliability of relying solely on the `page_title` for identification.
+#      We may need to consider additional parsing techniques for robustness.
+
+# By refining the existing code and addressing potential issues, we can achieve efficient
+# author page extraction while maintaining code maintainability and future-proofing
+# against potential website changes.
+
+
+#---------------------------------------------------------------------------------------------------------
+
+# Improvement 2: Offline Data Backup (Optional)
+
+# While the current implementation relies on the Wikiquote API, we can consider incorporating an optional fallback
+# mechanism using an offline dataset in case the API becomes unavailable.
+
+# This would provide increased resilience against API outages. An example dataset is available at:
+# https://www.kaggle.com/code/kerneler/starter-wikiquote-en-simplified-a2e29c89-c/input (English dataset)
+
+# However, there are considerations:
+
+# - Offline datasets might not be as up-to-date as the online API.
+# - Extracting "Quote of the Day" might not be feasible with offline data.
+# - Managing offline data could introduce additional complexity.
+
+# The decision to include an offline backup depends on the trade-off between resilience and complexity
+# within your specific use case.
+
+#---------------------------------------------------------------------------------------------------------
+
+# Improvement 3: Enhanced Quote Extraction 
+
+# We can potentially improve the accuracy of extracted quotes by considering the structure of Wikiquote pages.
+
+# Sometimes, entire text blocks or bullet points are mistakenly identified as quotes instead of the intended,
+# smaller quote segments within those blocks. Not all authors or languages exhibit this behavior.
+
+# A possible approach is to heuristically identify quotes based on their presence within **<b>** tags (bold formatting).
+# This approach might require further refinement depending on specific website structures.
+
+# This improvement aims to enhance the quality of extracted quotes by providing a more precise representation
+# of the intended quotes. However, it's important to acknowledge that this heuristic approach might not be
+# foolproof and could require adjustments based on language-specific website structures. Consider evaluating
+# its effectiveness for your use case.
+
 
 # ===================================================================================================
 # Helper functions to extract_quotes_li
